@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:telota="http://www.telota.de" xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>ODD für ediarum.AVHR</title>
+        <editor>Stefan Dumont <email>dumont@bbaw.de</email></editor>
+      </titleStmt>
+      <publicationStmt>
+        <publisher>
+          <ref target="http://www.bbaw.de">Berlin-Brandenburgische Akademie der Wissenschaften</ref>
+        </publisher>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Das ediarum zugrundeliegende TEI-XML-Schema basiert weitgehend auf dem Basisformat des Deutschen Textarchivs.</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <schemaSpec ident="avhr" source="https://raw.githubusercontent.com/ediarum/ediarum.BASE.data-model/dev/dist/ediarum.compiled.odd" start="TEI">
+        <!-- ediarum -->
+        <moduleRef key="tei"/>
+        <moduleRef key="header" />
+        <moduleRef key="core" />
+        <moduleRef key="textstructure"/>
+        <moduleRef key="figures"/>
+        <moduleRef key="linking"/>
+        <moduleRef key="msdescription" except="typeDesc"/>
+        <moduleRef key="namesdates"/>
+        <moduleRef key="textcrit"/>
+        <moduleRef key="transcr"/>
+        <moduleRef key="gaiji" />
+        
+        <!-- ediarum.AVHR -->
+        <elementSpec ident="title" module="core" mode="change">
+          <attList>
+            <attDef ident="type" mode="replace" usage="opt">
+              <datatype>
+                <dataRef key="teidata.enumerated"/>
+              </datatype>
+            </attDef>
+          </attList>
+        </elementSpec>
+        
+        <classRef key="att.docStatus" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml"/>
+        <elementRef key="revisionDesc" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml" />
+        <elementRef key="listChange" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml" />
+        <elementRef key="change" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml"/>
+        
+        <elementSpec ident="revisionDesc" module="header" mode="change">
+          <attList>
+            <attDef ident="status" mode="replace">
+              <valList type="closed">
+                <valItem ident="intern"/>
+                <valItem ident="basis"/>
+                <valItem ident="basis+"/>
+                <valItem ident="print"/>
+                <valItem ident="final"/>
+              </valList>
+            </attDef>
+          </attList>
+        </elementSpec>
+        
+        <elementRef key="measure" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml" />
+        <classRef key="att.measurement" include="unit quantity" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml"/>
+        
+        <classSpec type="atts" ident="att.measurement" mode="change">
+          <attList>
+            <attDef ident="unit" mode="replace">
+              <datatype>
+                <dataRef key="teidata.enumerated"/>
+              </datatype>
+            </attDef>
+          </attList>
+        </classSpec>
+        
+        <!-- 2022: Temporärer Fix, um Verwendung von head zu berücksichtigen -->
+        <elementSpec ident="head" module="core" mode="change">
+            <classes mode="change">
+              <memberOf key="model.pLike" mode="add"/>
+            </classes>
+        </elementSpec>
+        
+        <elementSpec ident="p" module="core" mode="change">
+          <attList>
+            <attDef ident="hand" mode="replace">
+              <datatype>
+                <dataRef key="teidata.enumerated"/>
+              </datatype>
+            </attDef>
+          </attList>
+        </elementSpec>
+        
+        <elementSpec ident="name" module="namesdates" mode="change">
+          <attList>
+            <attDef ident="type" mode="replace" usage="rec">
+              <valList type="closed">
+                <valItem ident="plant">
+                  <desc>Name ist der einer Pflanze</desc>
+                </valItem>
+                <valItem ident="animal">
+                  <desc>Name ist der eines Tieres</desc>
+                </valItem>
+                <valItem ident="animal|plant">
+                  <desc>Name ist der eines Pilzes, Alge o.ä.</desc>
+                </valItem>
+                <valItem ident="mineral">
+                  <desc>Name ist der eines Minerals</desc>
+                </valItem>
+              </valList>
+            </attDef>
+            <attDef ident="subtype" mode="replace" usage="opt">
+              <valList type="closed">
+                <valItem ident="vernacular"></valItem>
+              </valList>
+            </attDef>
+          </attList>
+        </elementSpec>
+        
+        <elementSpec ident="note" module="core" mode="change">
+          <attList>
+            <attDef ident="type" mode="change">
+              <valList type="closed" mode="change">
+                <valItem ident="auxCalc" mode="add">
+                    <desc>Anmerkung ist "Nebenrechnung"</desc>
+                </valItem>
+              </valList>
+            </attDef>
+            <attDef ident="place" mode="replace" usage="opt">
+              <datatype maxOccurs="unbounded"><dataRef key="teidata.enumerated"/></datatype>
+              <valList type="closed">
+                    <valItem ident="left">
+                      <desc>Manuskripte: Einfügung am linken Rand.</desc>
+                    </valItem>
+                    <valItem ident="right">
+                      <desc>Manuskripte: Einfügung am rechten Rand.</desc>
+                    </valItem>
+                    <valItem ident="foot">
+                      <desc>Fußnote</desc>
+                    </valItem>
+                    <valItem ident="end">
+                      <desc>Endnote</desc>
+                    </valItem>
+                    <valItem ident="mTop">
+                      <desc>Manuskripte: am oberen Rand</desc>
+                    </valItem>
+                    <valItem ident="mBottom">
+                      <desc>Manuskripte: am unteren Rand</desc>
+                    </valItem>
+                    <!-- Änderungen gg. DTABf -->
+                    <!-- inline statt mInline -->
+                    <valItem ident="inline">
+                      <desc>Manuskripte: Anmerkung innerhalb der Zeile</desc>
+                    </valItem>
+                    <!-- Änderungen gg. ediarum.BASE -->
+                    <valItem ident="opposite">
+                      <desc>Auf der gegenüberliegenden Seite</desc>
+                    </valItem>
+                    <valItem ident="overleaf">
+                      <desc>Auf der Rückseite des Blattes</desc>
+                    </valItem>
+                    <valItem ident="continuedElsewhere">
+                      <desc>An anderer Stelle</desc>
+                    </valItem>
+              </valList>
+            </attDef>
+          </attList>
+        </elementSpec>
+        
+        <elementSpec ident="add" module="core" mode="change">
+          <attList>
+            <attDef ident="place" mode="replace">
+              <datatype maxOccurs="unbounded"><dataRef key="teidata.enumerated"/></datatype>
+              <valList type="closed">
+                <!-- place muss insgesamt ersetzt werden, sonst gibt es Fehler -->
+                <valItem ident="across">
+                  <desc>
+                    Manuskripte: Hinzufügung durch Überschreibung des zu korrigierenden Textes.
+                  </desc>
+                </valItem>
+                <valItem ident="intralinear">
+                  <desc>
+                    Manuskripte: Einfügung innerhalb der Textzeile, jedoch ohne bestehenden Text zu überschreiben.
+                  </desc>
+                </valItem>
+                <valItem ident="superlinear">
+                  <desc>Manuskripte: Einfügung über der Zeile.</desc>
+                </valItem>
+                <valItem ident="sublinear">
+                  <desc>Manuskripte: Einfügung unter der Zeile.</desc>
+                </valItem>
+                <valItem ident="left">
+                  <desc>Manuskripte: Einfügung am linken Rand.</desc>
+                </valItem>
+                <valItem ident="right">
+                  <desc>Manuskripte: Einfügung am rechten Rand.</desc>
+                </valItem>
+                <!-- nur Avhr! -->
+                <valItem ident="mTop">
+                  <desc>Manuskripte: am oberen Rand</desc>
+                </valItem>
+                <valItem ident="mBottom">
+                  <desc>Manuskripte: am unteren Rand</desc>
+                </valItem>
+                <valItem ident="opposite">
+                  <desc>Auf der gegenüberliegenden Seite</desc>
+                </valItem>
+                <valItem ident="overleaf">
+                  <desc>Auf der Rückseite des Blattes</desc>
+                </valItem>
+                <valItem ident="continuedElsewhere">
+                  <desc>An anderer Stelle</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
+        </elementSpec>
+        
+        <elementSpec ident="reg" module="core" mode="change">
+          <attList>
+            <attDef ident="type" mode="replace">
+              <valList type="closed">
+                <valItem ident="deleted"/>
+              </valList>
+            </attDef>
+            <attDef ident="cert" mode="replace">
+              <valList type="closed">
+                <valItem ident="low"/>
+                <valItem ident="high"/>
+              </valList>
+            </attDef>
+         </attList>
+        </elementSpec>
+        
+        <elementSpec ident="sic" module="core" mode="change">
+          <attList>
+            <attDef ident="ana" mode="add">
+              <valList type="closed">
+                <valItem ident="#break-off"/>
+              </valList>
+            </attDef>
+         </attList>
+        </elementSpec>
+        
+        <elementSpec ident="ref" module="core" mode="change">
+          <attList>
+            <attDef ident="type" mode="change">
+              <valList mode="change">
+                <valItem ident="siglum" mode="add">
+                  <desc>Verweissiglen von Alexander von Humboldt oder seinen Mitarbeitern</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
+        </elementSpec>
+        
+        <elementSpec ident="foreign" mode="change">
+          <content>
+            <alternate minOccurs="0"
+              maxOccurs="unbounded">
+              <textNode/>
+              <classRef key="model.gLike"/>
+              <classRef key="model.attributable"/>
+              <classRef key="model.phrase"/>
+              <classRef key="model.global"/>
+              <classRef key="model.biblLike"/>
+            </alternate>
+          </content>
+        </elementSpec>
+        
+      </schemaSpec>
+      
+    </body>
+  </text>
+</TEI>

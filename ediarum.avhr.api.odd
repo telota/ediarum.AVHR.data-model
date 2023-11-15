@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:telota="http://www.telota.de" xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>ODD für edition humboldt digital - Datendump &amp; Datenausgabe via API</title>
+        <editor>Stefan Dumont <email>dumont@bbaw.de</email></editor>
+      </titleStmt>
+      <publicationStmt>
+        <publisher>
+          <ref target="http://www.bbaw.de">Berlin-Brandenburgische Akademie der Wissenschaften</ref>
+        </publisher>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Das ediarum zugrundeliegende TEI-XML-Schema basiert weitgehend auf dem Basisformat des Deutschen Textarchivs.</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <schemaSpec ident="avhr-api" source="https://raw.githubusercontent.com/telota/ediarum.AVHR.data-model/dev/dist/ediarum.avhr.compiled.odd" start="TEI">
+        <!-- ediarum -->
+        <moduleRef key="tei"/>
+        <moduleRef key="header" />
+        <moduleRef key="core" />
+        <moduleRef key="textstructure"/>
+        <moduleRef key="figures"/>
+        <moduleRef key="linking"/>
+        <moduleRef key="msdescription" except="typeDesc"/>
+        <moduleRef key="namesdates"/>
+        <moduleRef key="textcrit"/>
+        <moduleRef key="transcr"/>
+        <moduleRef key="gaiji" />
+        
+        <!-- ehd.API -->
+        <elementSpec ident="TEI" module="textstructure" mode="change">
+          <attList>
+            <attDef ident="doctype" ns="http://www.telota.de" mode="delete"/>                        
+            <attDef ident="oldID" usage="opt" mode="delete"/>
+          </attList>
+        </elementSpec>
+        
+        <elementSpec ident="persName" module="namesdates" mode="change">
+          <attList>
+            <attDef ident="key" mode="delete"/>
+            <attDef ident="ref" mode="replace">
+                <datatype>
+                  <dataRef key="teidata.pointer"></dataRef>                  
+                </datatype>
+            </attDef>
+          </attList>
+        </elementSpec>
+        
+        <elementSpec ident="placeName" module="namesdates" mode="change">
+          <attList>
+            <attDef ident="key" mode="delete"/>
+            <attDef ident="ref" mode="replace">
+              <datatype>
+                <dataRef key="teidata.pointer"></dataRef>                  
+              </datatype>
+            </attDef>
+          </attList>
+        </elementSpec>
+        
+        <elementRef key="keywords" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml" />
+        <elementRef key="term" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml" />
+        
+      </schemaSpec>
+      
+    </body>
+  </text>
+</TEI>
