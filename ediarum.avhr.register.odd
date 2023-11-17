@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_odds.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_odds.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Title</title>
+         </titleStmt>
+         <publicationStmt>
+            <p>Publication Information</p>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Information about the source</p>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <schemaSpec ident="avhr-index" source="https://raw.githubusercontent.com/ediarum/ediarum.REGISTER.data-model/dev/ediarum.register.compiled.xml" start="TEI">
+         
+            <moduleRef key="header" />
+            <moduleRef key="core" />
+            <moduleRef key="textstructure" />
+            <moduleRef key="tei"/>
+            <moduleRef key="namesdates" />
+            <moduleRef key="linking"/>
+         
+            <elementRef key="linkGrp" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml" />
+            <elementRef key="ptr" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml" />
+            <elementRef key="interp" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml" />
+            <elementRef key="quote" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml" />
+            <elementRef key="measure" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml" />
+            
+            <classRef key="att.measurement" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml"/>
+            <classRef key="att.global.analytic" source="https://www.tei-c.org/release/xml/tei/odd/p5subset.xml"/>
+            
+            <classSpec ident="att.global" type="atts" mode="change">
+               <classes mode="change">
+                  <memberOf key="att.global.analytic" mode="add"/>
+               </classes>
+               <attList>
+                  <attDef ident="oldID" mode="add">
+                     <datatype>
+                        <dataRef key="ID"/>
+                     </datatype>
+                  </attDef>
+               </attList>
+            </classSpec>
+            
+            <elementSpec ident="org" module="namesdates" mode="change">
+               <!-- allow <location> AFTER linkGrp -->
+               <content>
+                  <sequence>
+                     <classRef key="model.headLike"
+                        minOccurs="0" maxOccurs="unbounded"/>
+                     <alternate>
+                        <classRef key="model.pLike"
+                           minOccurs="0" maxOccurs="unbounded"/>
+                        <alternate minOccurs="0"
+                           maxOccurs="unbounded">
+                           <classRef key="model.labelLike"/>
+                           <classRef key="model.nameLike"/>
+                           <classRef key="model.placeLike"/>
+                           <classRef key="model.orgPart"/>
+                           <classRef key="model.milestoneLike"/>
+                        </alternate>
+                     </alternate>
+                     <alternate minOccurs="0"
+                        maxOccurs="unbounded">
+                        <classRef key="model.noteLike"/>
+                        <classRef key="model.biblLike"/>
+                        <elementRef key="linkGrp"/>
+                        <elementRef key="link"/>
+                        <elementRef key="ptr"/>
+                        <elementRef key="location"/>
+                     </alternate>
+                     <classRef key="model.personLike"
+                        minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </content>
+            </elementSpec>
+            
+      </schemaSpec>
+      </body>
+   </text>
+</TEI>
