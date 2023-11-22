@@ -19,7 +19,7 @@
   </teiHeader>
   <text>
     <body>
-      <schemaSpec ident="avhr-api" source="https://raw.githubusercontent.com/telota/ediarum.AVHR.data-model/dev/dist/ediarum.avhr.compiled.odd" start="TEI">
+      <schemaSpec ident="avhr-api" source="https://raw.githubusercontent.com/telota/ediarum.AVHR.data-model/main/dist/ediarum.avhr.compiled.odd" start="TEI">
         <!-- ediarum -->
         <moduleRef key="tei"/>
         <moduleRef key="header" />
