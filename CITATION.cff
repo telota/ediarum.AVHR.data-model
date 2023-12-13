@@ -1,0 +1,40 @@
+message: "If you use this software, please cite it using the metadata in the CFF file."
+authors:
+  - family-names: Dumont
+    given-names: Stefan
+    orcid: "https://orcid.org/0000-0002-6923-0950"
+  - family-names: Kraft
+    given-names: Tobias
+    orcid: "https://orcid.org/0000-0002-8564-1434"
+  - family-names: Thomas
+    given-names: Christian
+    orcid: "https://orcid.org/0000-0002-1761-0222"
+  - family-names: Haaf
+    given-names: Susanne
+    orcid: "https://orcid.org/0000-0002-4809-219X"
+  - family-names: Wierzoch
+    given-names: Jan
+    orcid: "https://orcid.org/0000-0002-6388-4064"
+title: ediarum.AVHR.data-model 
+abstract: "Data model for the edition humboldt digital"
+date-released: "2023-11-22"
+version: 1.0.0
+repository-code: "https://github.com/telota/ediarum.AVHR.data-model"
+license: CC-BY-4.0
+url: "https://edition-humboldt.de/"
+contact:
+  - email: dumont@bbaw.de
+    name: "Stefan Dumont"
+references: 
+  - authors:
+      - name: "[tba]"
+    title: "ediarum.BASE.data-model"
+    repository-code: "https://github.com/ediarum/ediarum.BASE.data-model" 
+    url: "https://www.ediarum.org"
+    type: "manual"
+  - authors: 
+      - name: "Berlin-Brandenburgische Akademie der Wissenschaften"
+    title: "DTABf. Deutsches Textarchiv – Basisformat (2011–2022)"
+    url: "http://deutschestextarchiv.de/doku/basisformat"
+    type: "manual"
+cff-version: 1.2.0
